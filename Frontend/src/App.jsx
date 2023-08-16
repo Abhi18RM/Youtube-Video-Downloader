@@ -6,6 +6,7 @@ export default function App() {
   const [input, setInput] = useState("");
   const [disabled, setDisabled] = useState(false);
   const PF = process.env.REACT_APP_PUBLIC_FOLDER;
+  const [validity, setValidity] = useState("none");
 
   const handleChange = (e) => {
     setInput(e.target.value);
@@ -15,10 +16,18 @@ export default function App() {
     e.preventDefault();
     setDisabled(true);
     console.log("Download clicked for:", input);
-    const res = await axios.post(`/?url=${input}`);
-    const downloadURL = `${PF}download/${res.data.videoId}`;
-    window.open(downloadURL, "_blank");
+    try {
+      const res = await axios.post(`/?url=${input}`);
+      const downloadURL = `${PF}download/${res.data.videoId}`;
+      window.open(downloadURL, "_blank");
+      setValidity("none");
+    }
+    catch(err){
+      console.error(err);
+      setValidity("block");
+    }
     setDisabled(false);
+    setInput("");
   };
 
   return (
@@ -35,6 +44,9 @@ export default function App() {
             onChange={handleChange}
           />
           <button disabled={disabled} onClick={handleClick}>Download</button>
+          <div className="warning" style={{display: validity}}>
+            <p>Enter a valid URL</p>
+          </div>
         </div>
       </div>
     </>
