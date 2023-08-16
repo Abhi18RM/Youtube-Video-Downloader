@@ -1,0 +1,38 @@
+.main {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.link {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 10px;
+}
+
+input {
+  margin: 10px;
+  padding: 10px;
+  width: 360px;
+  font-size: 15px;
+}
+
+input:focus{
+  outline: none;
+}
+
+button {
+  padding: 10px;
+  background-color: black;
+  color: white;
+  font-size: 14px;
+  border-radius: 5px;
+  cursor: pointer;
+  box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1px 3px 1px;
+}
+
+button:disabled{
+  cursor: no-drop;
+}
